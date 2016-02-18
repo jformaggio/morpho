@@ -1,0 +1,69 @@
+{
+  "stan": {
+
+      "name": "LGIv",
+
+      "model":     {
+          "file": "./LGIv_model/models/LGIv.stan",
+          "cache": "./LGIv_model/cache"
+          },
+
+      "data": {
+           "type": "mc",
+           "files": [
+              {
+               "name": "./LGIv_model/data/LGIv_MINOS.data", 
+               "format":"R"
+              }
+             ],
+           "parameters": [
+             {
+               "fitK" : 0,
+               "isQuantum" : 0,
+               "nOrder" : 3
+             }
+            ]
+           },
+
+      "run": {
+            "algorithim": "NUTS",
+            "iter":  125000,
+            "warmup": 25000,
+            "chain": 1,
+            "init": 0
+             },
+
+      "output": 
+            {
+             "name" : "./LGIv_model/results/LGIv_MINOS",
+             "format" : "root",
+             "tree" : "LGIv",
+             "branches" : [
+                     {"variable" : "iQuantum", "root_alias" : "isQuantum","type" : "int"},
+                     {"variable" : "isKfit", "root_alias" : "isKfit","type" : "int"},
+                     {"variable" : "nP", "root_alias" : "nPoints","type" : "int"},
+                     {"variable" : "deltam2", "root_alias" : "deltam2"},
+                     {"variable" : "sinsq2theta", "root_alias" : "sinsq2theta"},
+                     {"variable" : "maxK", "root_alias" : "maxK"},
+                     {"variable" : "minK", "root_alias" : "minK"},
+                     {"variable" : "deltamuK", "root_alias" : "deltamuK"},
+                     {"variable" : "sigmaK", "root_alias" : "sigmaK"},
+                     {"variable" : "maxK_MC", "root_alias" : "maxK_MC"},
+                     {"variable" : "minK_MC", "root_alias" : "minK_MC"},
+                     {"variable" : "deltamuK_MC", "root_alias" : "deltamuK_MC"},
+                     {"variable" : "sigmaK_MC", "root_alias" : "sigmaK_MC"},
+                     {"variable" : "nLGIv", "root_alias" : "nLGIv","type" : "int"},
+                     {"variable" : "nLGIv_MC", "root_alias" : "nLGIv_MC","type" : "int"},
+                     {"variable" : "pQuantum", "root_alias" : "pQuantum"},
+                     {"variable" : "pQsigma", "root_alias" : "pQsigma"},
+                     {"variable" : "myK_energy", "root_alias" : "myK_energy", "ndim":3},
+                     {"variable" : "myK_data", "root_alias" : "myK_data"},
+                     {"variable" : "myK_sample", "root_alias" : "myK_sample"},
+                     {"variable" : "myK_MC", "root_alias" : "myK_MC"},
+                     {"variable" : "myK_error", "root_alias" : "myK_error"},
+                     {"variable" : "nPick", "root_alias" : "nPick","type" : "int"},
+                     {"variable" : "lp__", "root_alias" : "LogLikelihood"}
+                   ]
+             }        
+      }
+}

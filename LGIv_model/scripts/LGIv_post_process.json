@@ -1,0 +1,56 @@
+{
+  "stan": {
+
+      "name": "LGIv_post_process",
+
+      "model":     {
+          "file": "./LGIv_model/models/LGIv_post_process.stan",
+          "cache": "./LGIv_model/cache"
+          },
+
+      "data": {
+           "type": "mc",
+           "files": [
+           {
+         "name" : "./LGIv_model/results/LGIv_MINOS.root", 
+         "format" : "root",
+         "tree" : "LGIv",
+         "branches" : [
+               {"name" : "nPoints", "stan_alias" : "nPoints","data_format" : "int"},   
+               {"name" : "nLGIv", "stan_alias" : "nLGIv","data_format" : "int"},   
+               {"name" : "nLGIv_MC", "stan_alias" : "nLGIv_MC","data_format" : "int"}   
+               ]
+           }
+            ]
+           },
+
+      "run": {
+            "algorithim": "NUTS",
+            "iter":  10000,
+            "warmup": 5000,
+            "chain": 1,
+            "init": [
+            {
+             "pQ" : 0.0,
+             "alpha" : 10.0,
+             "beta" : 55.0
+            }
+             ]
+             },
+
+      "output": 
+            {
+             "name" : "./LGIv_model/results/LGIv_post_processing_test",
+             "format" : "root",
+             "tree" : "LGIv_post",
+             "branches" : [
+                     {"variable" : "n_recon", "root_alias" : "n_recon","type" : "int"},   
+                     {"variable" : "survival_prob", "root_alias" : "survival_prob"},
+                     {"variable" : "pQ", "root_alias" : "pQ"},
+                     {"variable" : "alpha", "root_alias" : "alpha"},
+                     {"variable" : "beta",  "root_alias" : "beta"},
+                     {"variable" : "lp__", "root_alias" : "LogLikelihood"}
+                   ]
+             }        
+      }
+}
